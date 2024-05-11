@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo-da-Velha</title>
+    <style>
+        /* Estilos opcionais */
+    </style>
+</head>
+<body>
+    <h1>Jogo-da-Velha</h1>
+    <table id="board">
+        <tr>
+            <td onclick="play(0, 0)"></td>
+            <td onclick="play(0, 1)"></td>
+            <td onclick="play(0, 2)"></td>
+        </tr>
+        <tr>
+            <td onclick="play(1, 0)"></td>
+            <td onclick="play(1, 1)"></td>
+            <td onclick="play(1, 2)"></td>
+        </tr>
+        <tr>
+            <td onclick="play(2, 0)"></td>
+            <td onclick="play(2, 1)"></td>
+            <td onclick="play(2, 2)"></td>
+        </tr>
+    </table>
+    <div id="message"></div>
+
+    <script>
+        var board = [
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""]
+        ];
+        var currentPlayer = "X";
+        var moves = 0;
+
+        function play(row, col) {
+            if (board[row][col] === "" && !checkWinner()) {
+                board[row][col] = currentPlayer;
+                moves++;
+                displayBoard();
+                if (checkWinner()) {
+                    document.getElementById("message").textContent = currentPlayer + " wins!";
+                } else if (moves === 9) {
+                    document.getElementById("message").textContent = "It's a draw!";
+                } else {
+                    currentPlayer = currentPlayer === "X" ? "O" : "X";
+                }
+            }
+        }
+
+        function displayBoard() {
+            var table = document.getElementById("board");
+            for (var i = 0; i < 3; i++) {
+                for (var j = 0; j < 3; j++) {
+                    table.rows[i].cells[j].textContent = board[i][j];
+                }
+            }
+        }
+
+        function checkWinner() {
+            // Lógica para verificar o vencedor
+        }
+    </script>
+</body>
+</html>
